@@ -1,26 +1,27 @@
 package org.example;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class GradeCalculator {
-    private final List<Course> courses;
+
+    private final Courses courses;
 
     public GradeCalculator(List<Course> courses) {
+        this.courses = new Courses(courses);
+    }
+
+    public GradeCalculator(Courses courses){
         this.courses = courses;
     }
 
     public double calculateGrade() {
         // (학점수x교과목 평점)의 합계
-        double multipliedCreditAndCourseGrade = 0;
-        for (Course course : courses) {
-            multipliedCreditAndCourseGrade += course.muliplyCreditAndCourseGrade();
-        }
+        double totalMultipliedCreditAndCouseGrade = courses.multiplyCreditAndCourseGrade();
 
         // 수강신청 총학점 수
-        int totalCompletedCredit = courses.stream()
-                .mapToInt(Course::getCredit)
-                .sum();
+        int totalCompletedCredit = courses.calculateTotalCompletedCredit();
 
-        return multipliedCreditAndCourseGrade / totalCompletedCredit;
+        return totalMultipliedCreditAndCouseGrade / totalCompletedCredit;
     }
 }
