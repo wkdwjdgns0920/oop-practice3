@@ -18,6 +18,11 @@ public class Course {
         return credit;
     }
 
+    public double muliplyCreditAndCourseGrade() {
+        return credit * getGradeToNumber();
+    }
+
+    // 성적을 점수로 표현
     public double getGradeToNumber() {
         double grade = 0;
         switch (this.grade) {
@@ -42,4 +47,5 @@ public class Course {
         }
         return grade;
     }
+
 }
